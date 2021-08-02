@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <type name="Klevu\Recommendations\Service\RecsInteractiveOptionsProvider">
+        <arguments>
+            <argument name="isEnabledCondition" xsi:type="object">Klevu\Recommendations\Service\IsEnabledCondition</argument>
+        </arguments>
+    </type>
+
+    <type name="Klevu\FrontendJs\Service\InteractiveOptionsGenerator">
+        <arguments>
+            <argument name="interactiveOptionsProviders" xsi:type="array">
+                <item name="recommendations" xsi:type="object">Klevu\Recommendations\Service\RecsInteractiveOptionsProvider</item>
+            </argument>
+        </arguments>
+    </type>
+
+    <type name="Klevu\FrontendJs\Service\IsEnabledDeterminer">
+        <arguments>
+            <argument name="isEnabledConditions" xsi:type="array">
+                <item name="klevu_recommendations" xsi:type="object">Klevu\Recommendations\Service\IsEnabledCondition</item>
+            </argument>
+        </arguments>
+    </type>
+</config>

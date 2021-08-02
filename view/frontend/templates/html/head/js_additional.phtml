@@ -1,0 +1,32 @@
+<!-- Magento image path needs to be updated if pubIsInUse -->
+klevu.coreEvent.attach("setRemoteConfigRecsBaseUpdates", {
+    name: "klevuMagentoImage",
+    fire: function () {
+        klevu.recs.base.getScope().chains.search.control.add({
+            name: "klevuMagentoImage",
+            fire: function (data, scope) {
+                scope.recsScope.searchObject.getScope().chains.template.process.success.add({
+                    name: "klevuMagentoImage",
+                    fire: function (data, scope) {
+                        if (typeof window.klevu_pubIsInUse == "undefined") {
+                            window.klevu_pubIsInUse = true;
+                        }
+                        klevu.each(data.template.query, function (key, query) {
+                            if (query.result.length > 0) {
+                                klevu.each(query.result, function (key, product) {
+                                    if (window.klevu_pubIsInUse) {
+                                        product.image = product.image.replace('pub/', '');
+                                        product.image = product.image.replace('needtochange/', '');
+                                    } else {
+                                        product.image = product.image.replace('needtochange/', 'pub/');
+                                    }
+                                });
+                            }
+                        });
+                    }
+                });
+            }
+        });
+    }
+});
+

@@ -1,0 +1,29 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_file.xsd">
+    <system>
+        <section id="klevu_search" translate="label">
+            <group id="recommendations" translate="label comment" sortOrder="104" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Smart Recommendations</label>
+                <comment><![CDATA[
+                    <div class="kuInfo"><div class="message kuInfo-fright">
+                        For Smart Recommendations to function correctly, please ensure you set
+                        <strong>Metadata Settings</strong> &gt; <strong>Metadata</strong>: Yes to ensure Klevu has the
+                        context needed to provide relevant results.
+                    </div></div>
+                ]]></comment>
+
+                <field id="enabled" translate="label comment" type="select" sortOrder="10" showInDefault="1" showInWebsite="1"
+                       showInStore="1">
+                    <label>Enable on Frontend</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <comment><![CDATA[
+                        Enabling this option will add the prerequisite scripts to your frontend automatically,
+                        but you will still need to manually place your recommendation banners where you want them to appear.
+                        Find out how to do this here: <a href="https://support.klevu.com/knowledgebase/magento-integration-for-recommendations/" title="Placing Recommendation Banners" target="_blank">Placing Recommendation Banners</a>
+                    ]]></comment>
+                </field>
+            </group>
+        </section>
+    </system>
+</config>
