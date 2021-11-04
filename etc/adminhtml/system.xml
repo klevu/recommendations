@@ -20,7 +20,7 @@
                     <comment><![CDATA[
                         Enabling this option will add the prerequisite scripts to your frontend automatically,
                         but you will still need to manually place your recommendation banners where you want them to appear.
-                        Find out how to do this here: <a href="https://support.klevu.com/knowledgebase/magento-integration-for-recommendations/" title="Placing Recommendation Banners" target="_blank">Placing Recommendation Banners</a>
+                        Find out how to do this here: <a href="https://help.klevu.com/support/solutions/articles/5000871321-integration-steps-for-magento2" title="Placing Recommendation Banners" target="_blank">Placing Recommendation Banners</a>
                     ]]></comment>
                 </field>
             </group>
