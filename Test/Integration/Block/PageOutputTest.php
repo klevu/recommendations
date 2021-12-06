@@ -16,10 +16,12 @@ class PageOutputTest extends AbstractControllerTestCase
     /**
      * @magentoAppArea frontend
      * @magentoCache all disabled
-     * @magentoConfigFixture default klevu_search/recommendations/enabled 1
+     * @magentoConfigFixture default/klevu_search/recommendations/enabled 1
      * @magentoConfigFixture default_store klevu_search/recommendations/enabled 1
-     * @magentoConfigFixture default klevu_frontendjs/configuration/enabled 1
+     * @magentoConfigFixture default/klevu_frontendjs/configuration/enabled 1
      * @magentoConfigFixture default_store klevu_frontendjs/configuration/enabled 1
+     * @magentoConfigFixture default/klevu_search/developer/theme_version v1
+     * @magentoConfigFixture default_store klevu_search/developer/theme_version v1
      * @noinspection PhpParamsInspection
      */
     public function testRecsJsIncludesAreOutputToPageWhenEnabled()
@@ -50,10 +52,12 @@ class PageOutputTest extends AbstractControllerTestCase
     /**
      * @magentoAppArea frontend
      * @magentoCache all disabled
-     * @magentoConfigFixture default klevu_search/recommendations/enabled 0
+     * @magentoConfigFixture default/klevu_search/recommendations/enabled 0
      * @magentoConfigFixture default_store klevu_search/recommendations/enabled 0
-     * @magentoConfigFixture default klevu_frontendjs/configuration/enabled 0
+     * @magentoConfigFixture default/klevu_frontendjs/configuration/enabled 0
      * @magentoConfigFixture default_store klevu_frontendjs/configuration/enabled 0
+     * @magentoConfigFixture default/klevu_search/developer/theme_version v1
+     * @magentoConfigFixture default_store klevu_search/developer/theme_version v1
      * @depends testRecsJsIncludesAreOutputToPageWhenEnabled
      * @noinspection PhpParamsInspection
      */
@@ -85,12 +89,14 @@ class PageOutputTest extends AbstractControllerTestCase
     /**
      * @magentoAppArea frontend
      * @magentoCache all disabled
-     * @magentoConfigFixture default klevu_search/recommendations/enabled 1
+     * @magentoConfigFixture default/klevu_search/recommendations/enabled 1
      * @magentoConfigFixture default_store klevu_search/recommendations/enabled 1
-     * @magentoConfigFixture default klevu_frontendjs/configuration/enabled 1
+     * @magentoConfigFixture default/klevu_frontendjs/configuration/enabled 1
      * @magentoConfigFixture default_store klevu_frontendjs/configuration/enabled 1
-     * @magentoConfigFixture default klevu_search/general/js_api_key klevu-1234567890
+     * @magentoConfigFixture default/klevu_search/general/js_api_key klevu-1234567890
      * @magentoConfigFixture default_store klevu_search/general/js_api_key klevu-1234567890
+     * @magentoConfigFixture default/klevu_search/developer/theme_version v1
+     * @magentoConfigFixture default_store klevu_search/developer/theme_version v1
      * @noinspection PhpParamsInspection
      */
     public function testRecsJsIncludesAreOutputToPageWhenRecsAndAPIKeyGiven()
@@ -146,12 +152,14 @@ class PageOutputTest extends AbstractControllerTestCase
     /**
      * @magentoAppArea frontend
      * @magentoCache all disabled
-     * @magentoConfigFixture default klevu_frontendjs/configuration/enabled 0
+     * @magentoConfigFixture default/klevu_frontendjs/configuration/enabled 0
      * @magentoConfigFixture default_store klevu_frontendjs/configuration/enabled 0
-     * @magentoConfigFixture default klevu_search/recommendations/enabled 0
+     * @magentoConfigFixture default/klevu_search/recommendations/enabled 0
      * @magentoConfigFixture default_store klevu_search/recommendations/enabled 0
-     * @magentoConfigFixture default klevu_search/general/js_api_key klevu-1234567890
+     * @magentoConfigFixture default/klevu_search/general/js_api_key klevu-1234567890
      * @magentoConfigFixture default_store klevu_search/general/js_api_key klevu-1234567890
+     * @magentoConfigFixture default/klevu_search/developer/theme_version v1
+     * @magentoConfigFixture default_store klevu_search/developer/theme_version v1
      * @depends testRecsJsIncludesAreOutputToPageWhenRecsAndAPIKeyGiven
      * @noinspection PhpParamsInspection
      */
@@ -217,12 +225,13 @@ class PageOutputTest extends AbstractControllerTestCase
     /**
      * @magentoAppArea frontend
      * @magentoCache all disabled
-     * @magentoConfigFixture default klevu_frontendjs/configuration/enabled 1
+     * @magentoConfigFixture default/klevu_frontendjs/configuration/enabled 1
      * @magentoConfigFixture default_store klevu_frontendjs/configuration/enabled 1
-     * @magentoConfigFixture default klevu_search/recommendations/enabled 1
+     * @magentoConfigFixture default/klevu_search/recommendations/enabled 1
      * @magentoConfigFixture default_store klevu_search/recommendations/enabled 1
-     * @magentoConfigFixture default klevu_search/general/js_api_key
      * @magentoConfigFixture default_store klevu_search/general/js_api_key
+     * @magentoConfigFixture default/klevu_search/developer/theme_version v1
+     * @magentoConfigFixture default_store klevu_search/developer/theme_version v1
      * @depends testRecsJsIncludesAreOutputToPageWhenRecsAndAPIKeyGiven
      * @noinspection PhpParamsInspection
      */
@@ -274,10 +283,12 @@ class PageOutputTest extends AbstractControllerTestCase
     /**
      * @magentoAppArea frontend
      * @magentoCache all disabled
-     * @magentoConfigFixture default klevu_frontendjs/configuration/enabled 1
+     * @magentoConfigFixture default/klevu_frontendjs/configuration/enabled 1
      * @magentoConfigFixture default_store klevu_frontendjs/configuration/enabled 1
-     * @magentoConfigFixture default klevu_search/recommendations/enabled 0
+     * @magentoConfigFixture default/klevu_search/recommendations/enabled 0
      * @magentoConfigFixture default_store klevu_search/recommendations/enabled 0
+     * @magentoConfigFixture default/klevu_search/developer/theme_version v1
+     * @magentoConfigFixture default_store klevu_search/developer/theme_version v1
      * @depends testRecsJsIncludesAreOutputToPageWhenRecsAndAPIKeyGiven
      * @noinspection PhpParamsInspection
      */
