@@ -2,12 +2,15 @@
 
 namespace Klevu\Recommendations\Service;
 
-use Klevu\FrontendJs\Api\IsEnabledConditionInterface;
+use Klevu\FrontendJs\Api\IsEnabledConditionInterface as FrontendJsIsEnabledConditionInterface;
+use Klevu\Metadata\Api\IsEnabledConditionInterface as MetadataIsEnabledConditionInterface;
 use Klevu\Recommendations\Constants;
 use Magento\Framework\App\Config\ScopeConfigInterface;
 use Magento\Store\Model\ScopeInterface;
 
-class IsEnabledCondition implements IsEnabledConditionInterface
+class IsEnabledCondition implements
+    FrontendJsIsEnabledConditionInterface,
+    MetadataIsEnabledConditionInterface
 {
     /**
      * @var ScopeConfigInterface

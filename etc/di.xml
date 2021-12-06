@@ -9,7 +9,7 @@
     <type name="Klevu\FrontendJs\Service\InteractiveOptionsGenerator">
         <arguments>
             <argument name="interactiveOptionsProviders" xsi:type="array">
-                <item name="recommendations" xsi:type="object">Klevu\Recommendations\Service\RecsInteractiveOptionsProvider</item>
+                <item name="_klevu_recommendations" xsi:type="object">Klevu\Recommendations\Service\RecsInteractiveOptionsProvider</item>
             </argument>
         </arguments>
     </type>
@@ -17,7 +17,15 @@
     <type name="Klevu\FrontendJs\Service\IsEnabledDeterminer">
         <arguments>
             <argument name="isEnabledConditions" xsi:type="array">
-                <item name="klevu_recommendations" xsi:type="object">Klevu\Recommendations\Service\IsEnabledCondition</item>
+                <item name="_klevu_recommendations" xsi:type="object">Klevu\Recommendations\Service\IsEnabledCondition</item>
+            </argument>
+        </arguments>
+    </type>
+
+    <type name="Klevu\Metadata\Service\IsEnabledDeterminer">
+        <arguments>
+            <argument name="isEnabledConditions" xsi:type="array">
+                <item name="_klevu_recommendations" xsi:type="object">Klevu\Recommendations\Service\IsEnabledCondition</item>
             </argument>
         </arguments>
     </type>
