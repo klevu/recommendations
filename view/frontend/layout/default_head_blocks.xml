@@ -4,10 +4,29 @@
         <referenceBlock name="head.additional">
             <block class="Magento\Framework\View\Element\Template"
                    name="klevu_recommendations.js_includes"
-                   after="klevu_frontendjs.js_api_keys"
                    before="klevu_frontendjs.js_init"
                    template="Klevu_Recommendations::html/head/js_includes.phtml"
                    ifconfig="klevu_search/recommendations/enabled"/>
+            <block class="Klevu\Recommendations\Block\Html\Head\ThemeV2\InlineCurrencyTranslation"
+                   after="klevu_frontendjs.js_modules"
+                   template="Klevu_Recommendations::html/head/themev2/inline_currency_translation.phtml"
+                   name="klevu_recommendations.html_head.themev2.inline_currency_translation">
+                <arguments>
+                    <argument name="is_enabled_conditions_fqcn" xsi:type="array">
+                        <item name="_klevu_themev2_search" xsi:type="string">Klevu\Recommendations\Service\IsEnabledCondition</item>
+                    </argument>
+                </arguments>
+            </block>
+            <block class="Klevu\Recommendations\Block\Html\Head\ThemeV2\AddPriceSuffixToQuery"
+                   after="klevu_frontendjs.js_init"
+                   template="Klevu_Recommendations::html/head/themev2/add_price_suffix_to_query.phtml"
+                   name="klevu_recommendations.html_head.themev2.add_price_suffix_to_query">
+                <arguments>
+                    <argument name="is_enabled_conditions_fqcn" xsi:type="array">
+                        <item name="_klevu_themev2_add_price_suffix_to_query" xsi:type="string">Klevu\Recommendations\Service\IsEnabledCondition\AddPriceSuffixToQueryEnabledCondition</item>
+                    </argument>
+                </arguments>
+            </block>
         </referenceBlock>
         <referenceBlock name="klevu_frontendjs.js_init.additional.before">
             <block class="Magento\Framework\View\Element\Template"
@@ -15,6 +34,13 @@
                    name="klevu_js_additional"
                    template="Klevu_Recommendations::html/head/js_additional.phtml"
                    ifconfig="klevu_search/recommendations/enabled"/>
+        </referenceBlock>
+        <referenceBlock name="klevu_frontendjs.js_modules">
+            <arguments>
+                <argument name="is_enabled_conditions_fqcn" xsi:type="array">
+                    <item name="_klevu_themev2_recs" xsi:type="string">Klevu\Recommendations\Service\IsEnabledCondition</item>
+                </argument>
+            </arguments>
         </referenceBlock>
     </body>
 </page>

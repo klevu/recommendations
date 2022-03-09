@@ -1,0 +1,31 @@
+<?php /** @var Klevu\Recommendations\Block\Html\Head\ThemeV2\AddPriceSuffixToQuery $block */ ?>
+<script type="text/javascript">
+    klevu.settings.chains.initChain.add({
+        name: "addPriceSuffixToRecsQuery",
+        fire: function (data) {
+            if (klevu.getObjectPath(klevu.recs, "base", false)
+                && klevu.getGlobalSetting("flags.addPriceSuffixToQuery.recsModule", false)
+                && typeof klevu_addPriceSuffixToQueryControl === "object"
+            ) {
+                klevu.search.base.getScope().chains.request.control.addAfter('initRequest', klevu_addPriceSuffixToQueryControl);
+                klevu.setObjectPath(data, "flags.addPriceSuffixToQuery.recsModule", false);
+            }
+        }
+    });
+
+    document.addEventListener('<?php /** @noEscape */ echo $block->getCustomerDataLoadErrorEventName(); ?>', function () {
+        klevu({ powerUp: { recsModule: true }});
+    });
+    document.addEventListener('<?php /** @noEscape */ echo $block->getCustomerDataLoadedEventName(); ?>', function () {
+        klevu({
+            powerUp: {
+                recsModule: true
+            },
+            flags: {
+                addPriceSuffixToQuery: {
+                    recsModule: true
+                }
+            }
+        });
+    });
+</script>

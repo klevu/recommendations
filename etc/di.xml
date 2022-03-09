@@ -29,4 +29,24 @@
             </argument>
         </arguments>
     </type>
+
+	<type name="Klevu\Recommendations\Service\InteractiveOptionsProvider\AddPriceSuffixToQueryOptionsProvider">
+        <arguments>
+            <argument name="isEnabledCondition" xsi:type="object">Klevu\Recommendations\Service\IsEnabledCondition\AddPriceSuffixToQueryEnabledCondition</argument>
+        </arguments>
+    </type>
+
+    <type name="Klevu\FrontendJs\Service\InteractiveOptionsGenerator">
+        <arguments>
+            <argument name="interactiveOptionsProviders" xsi:type="array">
+                <item name="_klevu_recommendations_add_price_suffix_to_query" xsi:type="object">Klevu\Recommendations\Service\InteractiveOptionsProvider\AddPriceSuffixToQueryOptionsProvider</item>
+            </argument>
+        </arguments>
+    </type>
+
+    <type name="Klevu\Recommendations\Service\IsEnabledCondition\AddPriceSuffixToQueryEnabledCondition">
+        <arguments>
+            <argument name="baseIsEnabledCondition" xsi:type="object">Klevu\Recommendations\Service\IsEnabledCondition</argument>
+        </arguments>
+    </type>
 </config>
