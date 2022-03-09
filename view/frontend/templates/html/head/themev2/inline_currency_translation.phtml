@@ -1,0 +1,34 @@
+<?php /** @var Klevu\Recommendations\\Block\Html\Head\ThemeV2\InlineCurrencyTranslation $block */ ?>
+<script type="text/javascript">
+    klevu.settings.chains.initChain.add({
+        name: "addCurrencyTranslationToRecs",
+        fire: function (data) {
+            if (!klevu.getObjectPath(klevu.recs, "base", false)
+                || klevu.recs.base.getScope().chains.search.control.indexOf("populateSearchQueryData") <= 0
+                || klevu.getGlobalSetting("flags.currencyTranslationAdded.recsModule", false)
+            ) {
+                return;
+            }
+
+            klevu.recs.base.getScope().chains.search.control.addAfter("populateSearchQueryData", {
+                name: "addCurrencyTranslation",
+                fire: function (data, scope) {
+                    scope.recsScope.searchObject.getScope().chains.template.process.success.add({
+                        name: "addCurrencyTranslation",
+                        fire: function (data, scope) {
+                            var templateQueries = klevu.getObjectPath(data, "template.query", false);
+                            if (!templateQueries) {
+                                return;
+                            }
+
+                            klevu.each(templateQueries, function (queryKey, templateQuery) {
+                                klevu.search.modules.mageConvertPriceRecordCurrencyData(templateQuery.result, klevu_currentCurrencyCode, klevu_currentCurrencyRates);
+                            });
+                        }
+                    });
+                }
+            });
+            klevu.setObjectPath(data, "flags.currencyTranslationAdded.recsModule", true);
+        }
+    });
+</script>
