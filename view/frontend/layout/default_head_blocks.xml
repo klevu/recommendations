@@ -2,11 +2,27 @@
 <page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
     <body>
         <referenceBlock name="head.additional">
-            <block class="Magento\Framework\View\Element\Template"
+            <block class="Klevu\FrontendJs\Block\Html\Head\JsIncludes"
                    name="klevu_recommendations.js_includes"
                    before="klevu_frontendjs.js_init"
-                   template="Klevu_Recommendations::html/head/js_includes.phtml"
-                   ifconfig="klevu_search/recommendations/enabled"/>
+                   template="Klevu_FrontendJs::html/head/js_includes.phtml">
+                <arguments>
+                    <argument name="js_includes" xsi:type="array">
+                        <item name="klevu_recs_template" xsi:type="array">
+                            <item name="if_config" xsi:type="array">
+                                <item name="frontend_enabled" xsi:type="array">
+                                    <item name="path" xsi:type="const">Klevu\Recommendations\Constants::XML_PATH_RECS_ENABLED</item>
+                                    <item name="conditions" xsi:type="array">
+                                        <item name="eq" xsi:type="string">1</item>
+                                    </item>
+                                </item>
+                            </item>
+                            <item name="before" xsi:type="string">-</item>
+                            <item name="url" xsi:type="string"><![CDATA[https://{{ klevu_search/general/js_url }}/recs/v2/klevu-recs.js]]></item>
+                        </item>
+                    </argument>
+                </arguments>
+            </block>
             <block class="Klevu\Recommendations\Block\Html\Head\ThemeV2\InlineCurrencyTranslation"
                    after="klevu_frontendjs.js_modules"
                    template="Klevu_Recommendations::html/head/themev2/inline_currency_translation.phtml"
