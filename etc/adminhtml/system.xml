@@ -2,6 +2,16 @@
 <config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
         xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_file.xsd">
     <system>
+        <section id="klevu_integration">
+            <group id="next_steps">
+                <field id="recommendation_enabled" translate="label" sortOrder="30" type="select"
+                       showInDefault="1" showInWebsite="1" showInStore="1" extends="klevu_search/recommendations/enabled">
+                    <label>Enable Smart Recommendations</label>
+                    <config_path>klevu_search/recommendations/enabled</config_path>
+                    <frontend_model>Klevu\Recommendations\Block\Adminhtml\Form\Nextsteps\RecommendationsEnabled</frontend_model>
+                </field>
+            </group>
+        </section>
         <section id="klevu_search" translate="label">
             <group id="recommendations" translate="label comment" sortOrder="104" showInDefault="1" showInWebsite="1" showInStore="1">
                 <label>Smart Recommendations</label>
