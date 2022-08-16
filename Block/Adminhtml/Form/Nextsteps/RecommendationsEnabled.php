@@ -32,7 +32,7 @@ class RecommendationsEnabled extends Field
     public function render(AbstractElement $element)
     {
         $account = $this->getFeatures->execute();
-        if (!$account->isFeatureEnabled(AccountFeatures::PM_FEATUREFLAG_RECOMMENDATIONS)) {
+        if ($account && !$account->isFeatureEnabled(AccountFeatures::PM_FEATUREFLAG_RECOMMENDATIONS)) {
             return '';
         }
 

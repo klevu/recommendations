@@ -5,7 +5,7 @@
         <section id="klevu_integration">
             <group id="next_steps">
                 <field id="recommendation_enabled" translate="label" sortOrder="30" type="select"
-                       showInDefault="1" showInWebsite="1" showInStore="1" extends="klevu_search/recommendations/enabled">
+                       showInDefault="0" showInWebsite="0" showInStore="1" extends="klevu_search/recommendations/enabled">
                     <label>Enable Smart Recommendations</label>
                     <config_path>klevu_search/recommendations/enabled</config_path>
                     <frontend_model>Klevu\Recommendations\Block\Adminhtml\Form\Nextsteps\RecommendationsEnabled</frontend_model>
@@ -13,7 +13,8 @@
             </group>
         </section>
         <section id="klevu_search" translate="label">
-            <group id="recommendations" translate="label comment" sortOrder="104" showInDefault="1" showInWebsite="1" showInStore="1">
+            <group id="recommendations" translate="label comment" sortOrder="104" 
+                   showInDefault="1" showInWebsite="1" showInStore="1">
                 <label>Smart Recommendations</label>
                 <comment><![CDATA[
                     <div class="kuInfo"><div class="message kuInfo-fright">
@@ -23,8 +24,11 @@
                     </div></div>
                 ]]></comment>
 
-                <field id="enabled" translate="label comment" type="select" sortOrder="10" showInDefault="1" showInWebsite="1"
-                       showInStore="1">
+                <field id="enabled_info" translate="label comment" sortOrder="10" type="label" showInDefault="1" showInWebsite="1">
+                    <comment><![CDATA[Switch to Store View scope to manage.]]></comment>
+                </field>
+                <field id="enabled" translate="label comment" type="select" sortOrder="10" 
+                       showInDefault="0" showInWebsite="0" showInStore="1">
                     <label>Enable on Frontend</label>
                     <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
                     <comment><![CDATA[
