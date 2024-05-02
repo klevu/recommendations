@@ -1,5 +1,11 @@
-<?php /** @var Klevu\Recommendations\\Block\Html\Head\ThemeV2\InlineCurrencyTranslation $block */ ?>
-<script type="text/javascript">
+<?php
+/**
+ * @var Klevu\Recommendations\Block\Html\Head\ThemeV2\InlineCurrencyTranslation $block
+ * @var Magento\Framework\View\Helper\SecureHtmlRenderer $secureRenderer
+ */
+?>
+<?php
+$scriptString = <<<script
     klevu.settings.chains.initChain.add({
         name: "addCurrencyTranslationToRecs",
         fire: function (data) {
@@ -31,4 +37,11 @@
             klevu.setObjectPath(data, "flags.currencyTranslationAdded.recsModule", true);
         }
     });
-</script>
+script;
+?>
+<?= $secureRenderer->renderTag(
+    'script',
+    ['type' => 'text/javascript'],
+    $scriptString,
+    false
+) ?>
