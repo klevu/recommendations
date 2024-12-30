@@ -8,11 +8,11 @@
         "magento/module-config": "@stable",
         "magento/framework": ">=103.0.0",
         "klevu/module-metadata": "^1.2.1",
-        "klevu/module-frontend-js": "^1.4.0|^2.0.0",
+        "klevu/module-frontend-js": "^1.6.0|^2.3.0",
         "klevu/module-productsearch": "^2.7.4|^3.0.0"
     },
     "type": "magento2-module",
-    "version": "1.5.0",
+    "version": "1.6.0",
     "license": [
         "OSL-3.0",
         "AFL-3.0"
