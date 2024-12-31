@@ -26,22 +26,47 @@ $scriptString = <<<script
                             if (!templateQueries) {
                                 return;
                             }
-
                             klevu.each(templateQueries, function (queryKey, templateQuery) {
-                                klevu.search.modules.mageConvertPriceRecordCurrencyData(templateQuery.result, klevu_currentCurrencyCode, klevu_currentCurrencyRates);
+                                klevu.search.modules.mageConvertPriceRecordCurrencyData(
+                                    templateQuery.result,
+                                    klevu_currentCurrencyCode,
+                                    klevu_currentCurrencyRates
+                                );
                             });
                         }
                     });
                 }
             });
             klevu.setObjectPath(data, "flags.currencyTranslationAdded.recsModule", true);
+            klevu.support.register({
+                name: "customRecs",
+                objectType: "magento",
+                loaded: true,
+                active: true,
+                dependency: ["recs"]
+            });
         }
     });
+
 script;
+?>
+<?php
+$script = $block->isDeferJs()
+    ? <<<script
+        window._klvReady = window._klvReady || [];
+        window._klvReady.push(function() {
+            {$scriptString}
+        });
+
+script
+    : $scriptString;
 ?>
 <?= $secureRenderer->renderTag(
     'script',
-    ['type' => 'text/javascript'],
-    $scriptString,
+    [
+        'type' => 'text/javascript',
+        'id' => 'klevu_recs_currencytranslation',
+    ],
+    $script,
     false
 ) ?>

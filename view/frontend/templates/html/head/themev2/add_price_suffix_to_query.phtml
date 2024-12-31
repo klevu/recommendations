@@ -5,7 +5,7 @@
  */
 ?>
 <?php
-$scriptString = <<<script
+$scriptStringChains = <<<script
     klevu.settings.chains.initChain.add({
         name: "addPriceSuffixToRecsQuery",
         fire: function (data) {
@@ -19,26 +19,91 @@ $scriptString = <<<script
         }
     });
 
+script;
+?>
+<?php
+$recsPowerUp = <<<script
+    klevu({ powerUp: { recsModule: true } });
+script;
+
+$recsPowerUpWithSuffix = <<<script
+    klevu({
+        powerUp: { recsModule: true },
+        flags: {
+            addPriceSuffixToQuery: {
+                recsModule: true
+            }
+        }
+    });
+script;
+?>
+<?php if ($block->isDeferJs()): ?>
+    <?php
+    $scriptString = <<<script
+        window._klvReady = window._klvReady || [];
+        window._klvReady.push(function() {
+            {$scriptStringChains}
+        });
+
+        var klevuPowerUpRecs = function() {
+            window._klvReady = window._klvReady || [];
+            window._klvReady.push(function() {
+                klevu.support.hook(["magento.customRecs"], function() {
+                    {$recsPowerUp}
+                });
+            });
+
+            return true;
+        };
+        var klevuPowerUpRecsWithSuffix = function () {
+            window._klvReady = window._klvReady || [];
+            window._klvReady.push(function() {
+                klevu.support.hook(["magento.customRecs"], function() {
+                    {$recsPowerUpWithSuffix}
+                });
+            });
+
+            return true;
+        };
+
+script;
+        ?>
+<?php else: ?>
+    <?php
+    $scriptString = <<<script
+        {$scriptStringChains}
+
+        var klevuPowerUpRecs = function() {
+            {$recsPowerUp}
+
+            return true;
+        };
+        var klevuPowerUpRecsWithSuffix = function () {
+            {$recsPowerUpWithSuffix}
+
+            return true;
+        };
+
+script;
+    ?>
+<?php endif; ?>
+<?php
+$scriptString .= <<<script
     document.addEventListener('{$block->getCustomerDataLoadErrorEventName()}', function () {
-        klevu({ powerUp: { recsModule: true }});
+        klevuPowerUpRecs();
     });
     document.addEventListener('{$block->getCustomerDataLoadedEventName()}', function () {
-        klevu({
-            powerUp: {
-                recsModule: true
-            },
-            flags: {
-                addPriceSuffixToQuery: {
-                    recsModule: true
-                }
-            }
-        });
+        klevuPowerUpRecsWithSuffix();
     });
+
 script;
 ?>
 <?= $secureRenderer->renderTag(
     'script',
-    ['type' => 'text/javascript'],
+    [
+        'type' => 'text/javascript',
+        'id' => 'klevu_recs_pricesuffix',
+    ],
     $scriptString,
     false
 ) ?>
