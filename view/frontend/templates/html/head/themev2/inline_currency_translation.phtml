@@ -5,24 +5,24 @@
  */
 ?>
 <?php
-$scriptString = <<<script
+$scriptString = "
     klevu.settings.chains.initChain.add({
-        name: "addCurrencyTranslationToRecs",
+        name: 'addCurrencyTranslationToRecs',
         fire: function (data) {
-            if (!klevu.getObjectPath(klevu.recs, "base", false)
-                || klevu.recs.base.getScope().chains.search.control.indexOf("populateSearchQueryData") <= 0
-                || klevu.getGlobalSetting("flags.currencyTranslationAdded.recsModule", false)
+            if (!klevu.getObjectPath(klevu.recs, 'base', false)
+                || klevu.recs.base.getScope().chains.search.control.indexOf('populateSearchQueryData') <= 0
+                || klevu.getGlobalSetting('flags.currencyTranslationAdded.recsModule', false)
             ) {
                 return;
             }
 
-            klevu.recs.base.getScope().chains.search.control.addAfter("populateSearchQueryData", {
-                name: "addCurrencyTranslation",
+            klevu.recs.base.getScope().chains.search.control.addAfter('populateSearchQueryData', {
+                name: 'addCurrencyTranslation',
                 fire: function (data, scope) {
                     scope.recsScope.searchObject.getScope().chains.template.process.success.add({
-                        name: "addCurrencyTranslation",
+                        name: 'addCurrencyTranslation',
                         fire: function (data, scope) {
-                            var templateQueries = klevu.getObjectPath(data, "template.query", false);
+                            var templateQueries = klevu.getObjectPath(data, 'template.query', false);
                             if (!templateQueries) {
                                 return;
                             }
@@ -37,28 +37,25 @@ $scriptString = <<<script
                     });
                 }
             });
-            klevu.setObjectPath(data, "flags.currencyTranslationAdded.recsModule", true);
+            klevu.setObjectPath(data, 'flags.currencyTranslationAdded.recsModule', true);
             klevu.support.register({
-                name: "customRecs",
-                objectType: "magento",
+                name: 'customRecs',
+                objectType: 'magento',
                 loaded: true,
                 active: true,
-                dependency: ["recs"]
+                dependency: ['recs']
             });
         }
     });
-
-script;
+";
 ?>
 <?php
 $script = $block->isDeferJs()
-    ? <<<script
+    ? "
         window._klvReady = window._klvReady || [];
         window._klvReady.push(function() {
             {$scriptString}
-        });
-
-script
+        });"
     : $scriptString;
 ?>
 <?= $secureRenderer->renderTag(
