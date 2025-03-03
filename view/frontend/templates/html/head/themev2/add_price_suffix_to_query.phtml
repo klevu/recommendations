@@ -5,28 +5,27 @@
  */
 ?>
 <?php
-$scriptStringChains = <<<script
+$scriptStringChains = "
     klevu.settings.chains.initChain.add({
-        name: "addPriceSuffixToRecsQuery",
+        name: 'addPriceSuffixToRecsQuery',
         fire: function (data) {
-            if (klevu.getObjectPath(klevu.recs, "base", false)
-                && klevu.getGlobalSetting("flags.addPriceSuffixToQuery.recsModule", false)
-                && typeof klevu_addPriceSuffixToQueryControl === "object"
+            if (klevu.getObjectPath(klevu.recs, 'base', false)
+                && klevu.getGlobalSetting('flags.addPriceSuffixToQuery.recsModule', false)
+                && typeof klevu_addPriceSuffixToQueryControl === 'object'
             ) {
                 klevu.search.base.getScope().chains.request.control.addAfter('initRequest', klevu_addPriceSuffixToQueryControl);
-                klevu.setObjectPath(data, "flags.addPriceSuffixToQuery.recsModule", false);
+                klevu.setObjectPath(data, 'flags.addPriceSuffixToQuery.recsModule', false);
             }
         }
     });
-
-script;
+    ";
 ?>
 <?php
-$recsPowerUp = <<<script
+$recsPowerUp = "
     klevu({ powerUp: { recsModule: true } });
-script;
+";
 
-$recsPowerUpWithSuffix = <<<script
+$recsPowerUpWithSuffix = "
     klevu({
         powerUp: { recsModule: true },
         flags: {
@@ -35,11 +34,11 @@ $recsPowerUpWithSuffix = <<<script
             }
         }
     });
-script;
+";
 ?>
 <?php if ($block->isDeferJs()): ?>
     <?php
-    $scriptString = <<<script
+    $scriptString = "
         window._klvReady = window._klvReady || [];
         window._klvReady.push(function() {
             {$scriptStringChains}
@@ -48,7 +47,7 @@ script;
         var klevuPowerUpRecs = function() {
             window._klvReady = window._klvReady || [];
             window._klvReady.push(function() {
-                klevu.support.hook(["magento.customRecs"], function() {
+                klevu.support.hook(['magento.customRecs'], function() {
                     {$recsPowerUp}
                 });
             });
@@ -58,19 +57,18 @@ script;
         var klevuPowerUpRecsWithSuffix = function () {
             window._klvReady = window._klvReady || [];
             window._klvReady.push(function() {
-                klevu.support.hook(["magento.customRecs"], function() {
+                klevu.support.hook(['magento.customRecs'], function() {
                     {$recsPowerUpWithSuffix}
                 });
             });
 
             return true;
         };
-
-script;
+    ";
         ?>
 <?php else: ?>
     <?php
-    $scriptString = <<<script
+    $scriptString = "
         {$scriptStringChains}
 
         var klevuPowerUpRecs = function() {
@@ -83,20 +81,18 @@ script;
 
             return true;
         };
-
-script;
+    ";
     ?>
 <?php endif; ?>
 <?php
-$scriptString .= <<<script
+$scriptString .= "
     document.addEventListener('{$block->getCustomerDataLoadErrorEventName()}', function () {
         klevuPowerUpRecs();
     });
     document.addEventListener('{$block->getCustomerDataLoadedEventName()}', function () {
         klevuPowerUpRecsWithSuffix();
     });
-
-script;
+";
 ?>
 <?= $secureRenderer->renderTag(
     'script',
