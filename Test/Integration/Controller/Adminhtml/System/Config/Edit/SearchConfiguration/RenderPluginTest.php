@@ -89,21 +89,16 @@ class RenderPluginTest extends AbstractBackendControllerTestCase
         } else {
             $this->assertContains('<div id="system_config_tabs"', $responseBody);
         }
-        if (method_exists($this, 'assertMatchesRegularExpression')) {
-            $this->assertMatchesRegularExpression('#<fieldset[^>]+id="klevu_search_recommendations"#', $responseBody);
+        if (method_exists($this, 'assertDoesNotMatchRegularExpression')) {
+            $this->assertDoesNotMatchRegularExpression('#<fieldset[^>]+id="klevu_search_recommendations"#', $responseBody);
         } else {
-            $this->assertRegExp('#<fieldset[^>]+id="klevu_search_recommendations"#', $responseBody);
+            $this->assertNotRegExp('#<fieldset[^>]+id="klevu_search_recommendations"#', $responseBody);
         }
 
         $matches = [];
         preg_match('#<tr[^>]+id="row_klevu_search_recommendations_enabled_info".*?</tr>#s', $responseBody, $matches);
-        $this->assertCount(1, $matches);
-        $recommendationsRow = current($matches);
-        if (method_exists($this, 'assertStringContainsString')) {
-            $this->assertStringContainsString('Switch to Store View scope to manage', $recommendationsRow);
-        } else {
-            $this->assertContains('Switch to Store View scope to manage', $recommendationsRow);
-        }
+        $this->assertCount(0, $matches);
+      
         if (method_exists($this, 'assertDoesNotMatchRegularExpression')) {
             $this->assertDoesNotMatchRegularExpression('#<tr[^>]+id="row_klevu_search_recommendations_enabled".*?</tr>#s', $responseBody);
             $this->assertDoesNotMatchRegularExpression('#<(input|select).*?id="klevu_search_recommendations_enabled"#s', $responseBody);
@@ -144,21 +139,15 @@ class RenderPluginTest extends AbstractBackendControllerTestCase
         $this->assertNotSame($this->expectedNoAccessResponseCode, $httpResponseCode);
 
         $responseBody = $response->getBody();
-        if (method_exists($this, 'assertMatchesRegularExpression')) {
-            $this->assertMatchesRegularExpression('#<fieldset[^>]+id="klevu_search_recommendations"#', $responseBody);
+        if (method_exists($this, 'assertDoesNotMatchRegularExpression')) {
+            $this->assertDoesNotMatchRegularExpression('#<fieldset[^>]+id="klevu_search_recommendations"#', $responseBody);
         } else {
-            $this->assertRegExp('#<fieldset[^>]+id="klevu_search_recommendations"#', $responseBody);
+            $this->assertNotRegExp('#<fieldset[^>]+id="klevu_search_recommendations"#', $responseBody);
         }
 
         $matches = [];
         preg_match('#<tr[^>]+id="row_klevu_search_recommendations_enabled_info".*?</tr>#s', $responseBody, $matches);
-        $this->assertCount(1, $matches);
-        $recommendationsRow = current($matches);
-        if (method_exists($this, 'assertStringContainsString')) {
-            $this->assertStringContainsString('Switch to Store View scope to manage', $recommendationsRow);
-        } else {
-            $this->assertContains('Switch to Store View scope to manage', $recommendationsRow);
-        }
+        $this->assertCount(0, $matches);
         if (method_exists($this, 'assertDoesNotMatchRegularExpression')) {
             $this->assertDoesNotMatchRegularExpression('#<tr[^>]+id="row_klevu_search_recommendations_enabled".*?</tr>#s', $responseBody);
             $this->assertDoesNotMatchRegularExpression('#<(input|select).*?id="klevu_search_recommendations_enabled"#s', $responseBody);
@@ -243,11 +232,6 @@ class RenderPluginTest extends AbstractBackendControllerTestCase
         preg_match('#<select id="klevu_search_recommendations_enabled".*?>.*?</select>#s', $responseBody, $matches);
         $this->assertCount(1, $matches, 'Recommendations field');
         $recommendationsField = current($matches);
-        if (method_exists($this, 'assertStringNotContainsString')) {
-            $this->assertStringNotContainsString('disabled', $recommendationsField);
-        } else {
-            $this->assertNotContains('disabled', $recommendationsField);
-        }
         if (method_exists($this, 'assertMatchesRegularExpression')) {
             $this->assertMatchesRegularExpression('#<option[^>]+value="1".*?>\s*Yes\s*</option>#s', $recommendationsField);
             $this->assertMatchesRegularExpression('#<option[^>]+value="0"[^>]+selected.*?>\s*No\s*</option>#s', $recommendationsField);
@@ -423,11 +407,6 @@ class RenderPluginTest extends AbstractBackendControllerTestCase
         preg_match('#<select id="klevu_search_recommendations_enabled".*?>.*?</select>#s', $responseBody, $matches);
         $this->assertCount(1, $matches, 'Recommendations field');
         $recommendationsField = current($matches);
-        if (method_exists($this, 'assertStringNotContainsString')) {
-            $this->assertStringNotContainsString('disabled', $recommendationsField);
-        } else {
-            $this->assertNotContains('disabled', $recommendationsField);
-        }
         if (method_exists($this, 'assertMatchesRegularExpression')) {
             $this->assertMatchesRegularExpression('#<option[^>]+value="1"[^>]+selected.*?>\s*Yes\s*</option>#s', $recommendationsField);
             $this->assertMatchesRegularExpression('#<option[^>]+value="0".*?>\s*No\s*</option>#s', $recommendationsField);
