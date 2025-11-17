@@ -58,7 +58,7 @@ $script = $block->isDeferJs()
         });"
     : $scriptString;
 ?>
-<?= $secureRenderer->renderTag(
+<?= /* @noEscape */ $secureRenderer->renderTag(
     'script',
     [
         'type' => 'text/javascript',
