@@ -94,7 +94,7 @@ $scriptString .= "
     });
 ";
 ?>
-<?= $secureRenderer->renderTag(
+<?= /* @noEscape */ $secureRenderer->renderTag(
     'script',
     [
         'type' => 'text/javascript',
@@ -103,4 +103,3 @@ $scriptString .= "
     $scriptString,
     false
 ) ?>
-
